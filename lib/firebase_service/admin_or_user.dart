@@ -8,8 +8,8 @@ adminOrUser({required String email}) async {
   var docSnapshot = await FirebaseFirestore.instance.collection('users-data').doc(email).get();
   String value = docSnapshot.data()!['role'];
   if(value=='user'){
-    Get.to(UserScreen());
+    Get.off(UserScreen());
   }else if(value=='admin'){
-    Get.to(AdminHome());
+    Get.off(AdminHome());
   }
 }

@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/local_storage/local_storage.dart';
 import 'package:e_commerce_app/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ void main() async{
   await Firebase.initializeApp();
   runApp(MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => LocalStorage(),)
       ],
   child: const MyApp()));
 }
