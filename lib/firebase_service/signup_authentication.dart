@@ -14,7 +14,7 @@ signUpAuthentication({required String email, required String password, required 
         auth.currentUser!.sendEmailVerification();
         sendUserDataToDB(displayName: displayName, email: email, phone: phone);
         Get.snackbar('Hi', 'Verify Email');
-        Get.to(LoginScreen());
+        Get.off(LoginScreen());
       }
     }catch(e){if (kDebugMode) {
       print(e);

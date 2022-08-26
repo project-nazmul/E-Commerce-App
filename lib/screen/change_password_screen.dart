@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/firebase_service/reset_password.dart';
+import 'package:e_commerce_app/screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,7 +43,7 @@ class ChangePasswordScreen extends StatelessWidget {
             onPressed: (){
               if(keyText.currentState!.validate()){
                 resetPassword(emailController.text);
-                Get.back();
+                Get.off(LoginScreen());
               }
 
             },
