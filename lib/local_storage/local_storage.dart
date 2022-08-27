@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage extends ChangeNotifier{
   int index=0;
+  bool obsecurePassword=true;
   String? email;
   storeEmail(String email)async{
     SharedPreferences store = await SharedPreferences.getInstance();
