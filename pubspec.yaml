@@ -51,6 +51,8 @@ dev_dependencies:
   cloud_firestore: ^3.4.5
   provider: ^6.0.3
   shared_preferences: ^2.0.15
+  carousel_slider: ^4.1.1
+  dots_indicator: ^2.1.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

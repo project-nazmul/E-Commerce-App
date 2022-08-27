@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/firebase_service/signup_authentication.dart';
+import 'package:e_commerce_app/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -90,12 +91,15 @@ class SignUpScreen extends StatelessWidget {
                 )
             ),
             SizedBox(height: 15,),
-            ElevatedButton(onPressed: ()async{
-              if(formKey.currentState!.validate()){
-                await signUpAuthentication( email: emailController.text,password: passwordController.text,displayName: displayNameController.text,phone: phoneController.text);
-              }
+            customButton(
+              text: "Sign up",
+              onPressed: ()async{
+                if(formKey.currentState!.validate()){
+                  await signUpAuthentication( email: emailController.text,password: passwordController.text,displayName: displayNameController.text,phone: phoneController.text);
+                }
 
-            }, child: Text('Sign Up'))
+              }
+            ),
           ],
         ),
       ),

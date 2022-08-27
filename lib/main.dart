@@ -10,7 +10,7 @@ void main() async{
   await Firebase.initializeApp();
   runApp(MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => LocalStorage(),)
+        ChangeNotifierProvider(create: (context) => LocalStorage(),),
       ],
   child: const MyApp()));
 }

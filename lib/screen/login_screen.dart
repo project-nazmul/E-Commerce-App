@@ -2,6 +2,7 @@ import 'package:e_commerce_app/firebase_service/signin_authentication.dart';
 import 'package:e_commerce_app/screen/change_password_screen.dart';
 import 'package:e_commerce_app/screen/home_screen.dart';
 import 'package:e_commerce_app/screen/signUpScreen.dart';
+import 'package:e_commerce_app/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -78,11 +79,14 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    ElevatedButton(onPressed: ()async{
-                      if(formKey.currentState!.validate()){
-                        await signInAuthentication(context: context,email: emailController.text, password: passwordController.text);
+                    customButton(
+                      text: "Login",
+                      onPressed: ()async{
+                        if(formKey.currentState!.validate()){
+                          await signInAuthentication(context: context,email: emailController.text, password: passwordController.text);
+                        }
                       }
-                    }, child: Text('Login')),
+                    ),
                   ],
                 ),
                 SizedBox(height: 10,),
