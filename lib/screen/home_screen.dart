@@ -14,10 +14,10 @@ import 'package:provider/provider.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
   final List<Container> pages = [
-    carosolImage(Colors.red),
-    carosolImage(Colors.blue),
-    carosolImage(Colors.yellow),
-    carosolImage(Colors.green),
+    carosolImage("assets/images/carousel1.jpg"),
+    carosolImage("assets/images/carousel2.jpg"),
+    carosolImage("assets/images/carousel3.jpg"),
+
   ];
   @override
   Widget build(BuildContext context) {
