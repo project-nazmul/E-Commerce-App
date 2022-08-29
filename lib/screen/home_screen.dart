@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/firebase_service/admin_or_user.dart';
+import 'package:e_commerce_app/firebase_service/fetch_image.dart';
 import 'package:e_commerce_app/local_storage/local_storage.dart';
 import 'package:e_commerce_app/screen/login_screen.dart';
 import 'package:e_commerce_app/widget/carosol_image.dart';
@@ -13,16 +14,17 @@ import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-  final List<Container> pages = [
+  List<Container> pages = [
     carosolImage("assets/images/carousel1.jpg"),
     carosolImage("assets/images/carousel2.jpg"),
     carosolImage("assets/images/carousel3.jpg"),
-
   ];
   @override
   Widget build(BuildContext context) {
+
     final provider = Provider.of<LocalStorage>(context,listen: true);
     provider.loadEmail();
+
     return WillPopScope(
       onWillPop: ()async{
         SystemNavigator.pop();
@@ -75,6 +77,7 @@ class HomeScreen extends StatelessWidget {
                 customButton(
                   text: 'Start Now',
                   onPressed: (){
+                    fetchImage();
                     provider.email==null?Get.off(LoginScreen()):adminOrUser(email: provider.email.toString());
                   }
                 )
