@@ -11,26 +11,20 @@ class UserHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<LocalStorage>(context,listen: false);
-    return WillPopScope(
-      onWillPop: () async{
-        Get.off(HomeScreen());
-        return false;
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text('Home'),
-          actions: [
-            IconButton(
-                onPressed: (){
-                  provider.removeEmail();
-                  provider.loadEmail();
-                  Get.off(LoginScreen());
-                },
-                icon: Icon(Icons.logout)
-            )
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text('Home'),
+        actions: [
+          IconButton(
+              onPressed: (){
+                provider.removeEmail();
+                provider.loadEmail();
+                Get.off(LoginScreen());
+              },
+              icon: Icon(Icons.logout)
+          )
+        ],
       ),
     );
   }

@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                 customButton(
                   text: 'Start Now',
                   onPressed: (){
-                    provider.email==null?Get.to(LoginScreen()):adminOrUser(email: provider.email.toString());
+                    provider.email==null?Get.off(LoginScreen()):adminOrUser(email: provider.email.toString());
                   }
                 )
               ],
