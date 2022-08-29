@@ -76,8 +76,8 @@ class HomeScreen extends StatelessWidget {
                 ),
                 customButton(
                   text: 'Start Now',
-                  onPressed: (){
-                    fetchImage();
+                  onPressed: ()async{
+                    await fetchImage();
                     provider.email==null?Get.off(LoginScreen()):adminOrUser(email: provider.email.toString());
                   }
                 )

@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/firebase_service/fetch_product_image.dart';
 import 'package:e_commerce_app/local_storage/local_storage.dart';
 import 'package:e_commerce_app/screen/admin_screen/add_new_product.dart';
 import 'package:e_commerce_app/screen/admin_screen/manage_product.dart';
@@ -36,7 +37,8 @@ class AdminHome extends StatelessWidget {
         body: Column(
           children: [
             ElevatedButton(
-              onPressed: (){
+              onPressed: ()async{
+                await fetchProductImage();
                 Get.to(AddNewProduct());
               },
               child: Text('Add new Product')),
