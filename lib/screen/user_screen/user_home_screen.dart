@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/firebase_service/fetch_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/local_storage/local_storage.dart';
 import 'package:e_commerce_app/screen/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -26,21 +26,30 @@ class UserHomeScreen extends StatelessWidget {
           )
         ],
       ),
-      body: ListView.builder(
-        itemCount: images.length,
-        itemBuilder: (context, index) {
-          return Container(
-            margin: EdgeInsets.all(8),
-            height: 150,
-            width: 150,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                  image: NetworkImage(images[index].toString()))
-            ),
-          );
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection("products-data").snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+           if(snapshot.hasData){
+             return ListView.builder(
+               itemCount: snapshot.data!.docs.length,
+               itemBuilder: (context, index) {
+                 return Container(
+                   margin: EdgeInsets.all(8),
+                   height: 150,
+                   width: 150,
+                   decoration: BoxDecoration(
+                       image: DecorationImage(
+                           fit: BoxFit.fill,
+                           image: NetworkImage(snapshot.data!.docs[index]['img'].toString()))
+                   ),
+                 );
+               },
+             );
+           }
+           return Center(child: CircularProgressIndicator(),);
+
         },
-      ),
+      )
     );
   }
 }
