@@ -35,7 +35,7 @@ class UserHomeScreen extends StatelessWidget {
           children: [
             SizedBox(height: 20,),
             textField(icon: Icons.search,text: "Search products",controller:searchController ),
-            SizedBox(height: 40,),
+            SizedBox(height: 30,),
             customText(text: "All Products",clr: Colors.blue,fs: 22,fw: FontWeight.bold),
             SizedBox(height: 10,),
             Expanded(

@@ -7,6 +7,11 @@ import 'package:e_commerce_app/widget/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+final nameController = TextEditingController();
+
+final desController = TextEditingController();
+
+final priceController = TextEditingController();
 class AddNewProduct extends StatefulWidget {
 
   @override
@@ -14,11 +19,7 @@ class AddNewProduct extends StatefulWidget {
 }
 
 class _AddNewProductState extends State<AddNewProduct> {
-  final nameController = TextEditingController();
 
-  final desController = TextEditingController();
-
-  final priceController = TextEditingController();
 
   final keys = GlobalKey<FormState>();
 
