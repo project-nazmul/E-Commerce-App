@@ -21,43 +21,58 @@ class EditProduct extends StatefulWidget {
 }
 
 class _EditProductState extends State<EditProduct> {
-  updateData({required String id,required String name, required String description, required String price, required String img}){
-    FirebaseFirestore.instance.collection("products-data").doc(id).update(
-        {
-          "name":name,
-          "description":description,
-          "price":price,
-          "img":img
-        }
-    ).then((value) => Fluttertoast.showToast(msg: '"Updated Successfully"')).catchError((error)=>Fluttertoast.showToast(msg: "something is wrong. $error"));
+  updateData({required String id}) async {
+    if(widget.image==null){
+      FirebaseFirestore.instance.collection("products-data").doc(id).update(
+          {
+            "name":nameController.text,
+            "description":desController.text,
+            "price":priceController.text,
+          }
+      ).then((value) => Fluttertoast.showToast(msg: '"Updated Successfully"')).catchError((error)=>Fluttertoast.showToast(msg: "something is wrong. $error"));
+    }else{
+      UploadTask uploadTask= FirebaseStorage.instance.ref('products-image').child(widget.image!.name).putFile(File(widget.image!.path));
+      TaskSnapshot snapshot = await uploadTask;
+      widget.img=await snapshot.ref.getDownloadURL();
+      FirebaseFirestore.instance.collection("products-data").doc(id).update(
+          {
+            "name":nameController.text,
+            "description":desController.text,
+            "price":priceController.text,
+            "img":widget.img
+          }
+      ).then((value) => Fluttertoast.showToast(msg: '"Updated Successfully"')).catchError((error)=>Fluttertoast.showToast(msg: "something is wrong. $error"));
+    }
+
+    nameController.clear();
+    desController.clear();
+    priceController.clear();
+
   }
 
   imageFromCamera()async{
     ImagePicker _picker = ImagePicker();
-    XFile? img= await _picker.pickImage(source: ImageSource.camera);
+    XFile? imgX= await _picker.pickImage(source: ImageSource.camera);
     setState(() {
-      widget.image=img;
+      widget.image=imgX;
     });
-    writeImage();
   }
 
   imageFromGallery()async{
     ImagePicker _picker = ImagePicker();
-    XFile? img= await _picker.pickImage(source: ImageSource.gallery);
+    XFile? imgX= await _picker.pickImage(source: ImageSource.gallery);
     setState(() {
-      widget.image=img;
+      widget.image=imgX;
     });
-    writeImage();
   }
 
-  writeImage()async{
-    TaskSnapshot taskSnapshot=await FirebaseStorage.instance.ref('products-image').child(widget.image!.name).putFile(File(widget.image!.path));
-    String val = await taskSnapshot.ref.getDownloadURL();
-
-    setState(() {
-      widget.img=val;
-    });
-
+  @override
+  void initState() {
+    nameController.text=widget.snapshot.data!.docs[widget.index]['name'];
+    desController.text=widget.snapshot.data!.docs[widget.index]['description'];
+    priceController.text=widget.snapshot.data!.docs[widget.index]['price'];
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -97,7 +112,7 @@ class _EditProductState extends State<EditProduct> {
                             ],
                           ),
                         )),
-                    SizedBox(height:200,width:double.infinity,child: widget.img!=null?Image.network(widget.img.toString()):Image.network(widget.currentImg),),
+                    SizedBox(height:200,width:double.infinity,child: widget.image!=null?Image.file(File(widget.image!.path)):Image.network(widget.currentImg),),
                     SizedBox(height: 8,),
                     customButton(
                         text: "Choose Image",
@@ -136,11 +151,9 @@ class _EditProductState extends State<EditProduct> {
 
 
                         //Replacing with edited data
-                        updateData(id: widget.snapshot.data!.docs[widget.index].id,name: nameController.text, description: desController.text, price: priceController.text,img: widget.img==null?widget.currentImg.toString():widget.img.toString());
+                        updateData(id: widget.snapshot.data!.docs[widget.index].id);
 
-                        nameController.clear();
-                        desController.clear();
-                        priceController.clear();
+
                         Navigator.pop(context);
                       },
                       child: const Text('Submit'))

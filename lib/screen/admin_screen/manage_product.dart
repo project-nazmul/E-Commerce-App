@@ -88,7 +88,10 @@ class ManageProduct extends StatelessWidget {
                                           style: ButtonStyle(
                                               backgroundColor: MaterialStatePropertyAll(Colors.blue.withOpacity(0.2))
                                           ),
-                                          onPressed: (){},
+                                          onPressed: (){
+                                            FirebaseFirestore.instance.collection('products-data').doc(snapshot.data!.docs[index].id).delete();
+
+                                          },
                                           child: Icon(Icons.delete,color: Colors.red,)
                                       ),
                                     ),

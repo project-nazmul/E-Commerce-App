@@ -55,7 +55,7 @@ class UserHomeScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(20),
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
-                                        image: NetworkImage(snapshot.data!.docs[index]["img"])
+                                        image: NetworkImage(snapshot.data!.docs[index]['img'])
                                     )
 
                                 ),

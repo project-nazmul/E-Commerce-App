@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_app/screen/admin_screen/manage_product.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:e_commerce_app/widget/custom_button.dart';
@@ -139,6 +140,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                   desController.clear();
                   priceController.clear();
                   print("Product added");
+                  Get.off(ManageProduct());
 
               }else{
                 print("Put all information");
